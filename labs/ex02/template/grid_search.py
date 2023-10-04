@@ -43,3 +43,14 @@ def grid_search(y, tx, grid_w0, grid_w1):
             w = np.array([w0, w1])
             losses[i,j] = compute_loss(y, tx, w)
     return losses
+
+def compute_grid_search(y, tx):
+    grid_w0, grid_w1 = generate_w(num_intervals=50)
+
+    grid_losses = grid_search(y, tx, grid_w0, grid_w1)
+
+    loss_star, w0_star, w1_star = get_best_parameters(grid_w0, grid_w1, grid_losses)
+    w_star = np.array([w0_star, w1_star])
+    return ((np.array([w0_star, w1_star]), loss_star))
+    
+    
